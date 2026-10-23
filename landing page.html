@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yogee - Calamba Laguna</title>
+  <link rel="stylesheet" href="landing page.css" />
+</head>
+<body>
+   <header class="navbar">
+    <div class="logo-container">
+      <img src="images/yogee lugo.jpg" alt="Logo" class="logo">
+      <span class="brand-name">Yogee - Calamba Laguna</span>
+    </div>
+    
+    <!-- Mobile menu button -->
+    <button class="mobile-menu-btn" id="mobile-menu-btn">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+    
+    <nav class="nav-links" id="nav-links">
+      <a href="#" class="nav-link highlight">Home</a>
+      <a href="abus.html" class="nav-link">About Us</a>
+      <a href="package.html" class="nav-link">Packages</a>
+      <a href="Reservation.html" class="nav-link">Reservation</a>
+      <div id="user-nav">
+        <a href="Login.html" id="login-link" class="nav-link">Log In</a>
+        <div id="user-menu" style="display: none;">
+          <span id="user-name"></span>
+          <a href="dashboard.html" class="nav-link">Dashboard</a>
+          <a href="#" onclick="logout()" class="nav-link">Logout</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section with cover.png background -->
+  <section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>YOGEE - CALAMBA, LAGUNA</h1>
+      <p class="tagline">Choose Your Taste! Bring the FROYO craze into your parties!</p>
+      <div class="cta-buttons">
+        <a href="Reservation.html" class="btn-primary">Reserve NOW!</a>
+        <a href="package.html" class="btn-secondary">View Packages</a>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-content">
+    <section class="intro-section">
+      <div class="content-wrapper">
+        <div class="intro-text">
+          <h2>Your Healthy Dessert Option</h2>
+          <p>Frozen Yogurt - your healthy dessert option, guilt free and delicious!</p>
+          <p>We cater events for Weddings, Debuts, Birthday Parties, Anniversaries, Meetings, Seminars and all celebrations of life!</p>
+        </div>
+        <div class="intro-image">
+          <img src="images/cover.png" alt="Yogee Frozen Yogurt Display" class="featured-image">
+        </div>
+      </div>
+    </section>
+
+    <section class="services-section">
+      <h2>Our Services</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">💒</div>
+          <h3>Weddings</h3>
+          <p>Make your special day even sweeter with our premium yogurt bar</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🎂</div>
+          <h3>Birthday Parties</h3>
+          <p>Celebrate another year with healthy and delicious frozen yogurt</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">👑</div>
+          <h3>Debuts</h3>
+          <p>Add elegance to your debut with our customizable yogurt station</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">💕</div>
+          <h3>Anniversaries</h3>
+          <p>Commemorate milestones with our guilt-free dessert options</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">💼</div>
+          <h3>Corporate Events</h3>
+          <p>Perfect for meetings, seminars, and office celebrations</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🎉</div>
+          <h3>Special Celebrations</h3>
+          <p>Any celebration of life deserves our delicious frozen yogurt</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="why-choose-us">
+      <h2>Why Choose Yogee?</h2>
+      <div class="section-with-image">
+        <div class="benefits-grid">
+          <div class="benefit-item">
+            <div class="benefit-icon">🥶</div>
+            <h3>Fresh & Healthy</h3>
+            <p>Our frozen yogurt is made with premium ingredients, offering a guilt-free dessert option for health-conscious guests.</p>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">🎨</div>
+            <h3>Customizable Experience</h3>
+            <p>Choose from 18 toppings and 10 syrups to create the perfect yogurt combination for your event.</p>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">👥</div>
+            <h3>Professional Service</h3>
+            <p>Our experienced staff handles setup, service, and cleanup, so you can focus on enjoying your celebration.</p>
+          </div>
+          <div class="benefit-item">
+            <div class="benefit-icon">💰</div>
+            <h3>Affordable Packages</h3>
+            <p>Flexible pricing options starting from ₱10,999 to fit any budget and event size.</p>
+          </div>
+        </div>
+        <div class="section-image">
+          <img src="images/cover.png" alt="Yogurt Bar Setup" class="accent-image">
+        </div>
+      </div>
+    </section>
+
+    <section class="process-section">
+      <h2>How It Works</h2>
+      <div class="process-steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Choose Package</h3>
+          <p>Select from our three amazing packages based on your event needs and guest count.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Book & Reserve</h3>
+          <p>Fill out our reservation form and pay the ₱2,000 non-refundable reservation fee.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>We Setup</h3>
+          <p>Our team arrives 4 hours before your event to setup the complete yogurt bar station.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>Enjoy & Celebrate</h3>
+          <p>Your guests enjoy fresh frozen yogurt while we handle everything. We'll clean up too!</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials-section">
+      <h2>What Our Customers Say</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial">
+          <p>"Yogee made our wedding reception extra special! The yogurt bar was a huge hit with all our guests. Professional service and delicious treats!"</p>
+          <div class="customer-name">- Maria & John's Wedding</div>
+        </div>
+        <div class="testimonial">
+          <p>"Perfect addition to my daughter's 18th birthday! The setup was beautiful and the variety of toppings was amazing. Highly recommended!"</p>
+          <div class="customer-name">- Birthday Celebration</div>
+        </div>
+        <div class="testimonial">
+          <p>"Great for corporate events! Our team loved the healthy dessert option during our company anniversary celebration."</p>
+          <div class="customer-name">- Corporate Client</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <h2>Ready to Sweeten Your Event?</h2>
+      <p>Let us bring the FROYO craze to your next celebration!</p>
+      <div class="cta-buttons">
+        <a href="package.html" class="cta-button primary">View Packages</a>
+        <a href="Reservation.html" class="cta-button secondary">Book Now</a>
+      </div>
+    </section>
+
+    <section class="contact-section">
+      <h2>Get In Touch</h2>
+      <div class="contact-info">
+        <div class="contact-item">
+          <h3>📍 Location</h3>
+          <p>Pamana Homes, 103 Kayamanan St<br>Calamba, 4027 Laguna<br>Philippines</p>
+        </div>
+        <div class="contact-item">
+          <h3>📧 Email</h3>
+          <p><a href="mailto:yogeecalamba@gmail.com">yogeecalamba@gmail.com</a></p>
+        </div>
+        <div class="contact-item">
+          <h3>📱 Follow Us</h3>
+          <p><a href="https://www.facebook.com/Yogeecalamba" target="_blank">Facebook - Yogeecalamba</a></p>
+        </div>      </div>
+  </section>
+  </main>
+
+  <!-- Enhanced background with cover.png -->
+  <div class="bg-container">
+    <div class="bg-gallery">
+      <img src="images/cover.png" alt="bg" class="bg bg-1">
+      <img src="images/cover.png" alt="bg" class="bg bg-2">
+      <img src="images/cover.png" alt="bg" class="bg bg-3">
+    </div>
+  </div>
+
+  <!-- Floating cover elements -->
+  <div class="floating-elements">
+    <div class="floating-cover floating-1">
+      <img src="images/cover.png" alt="Yogurt">
+    </div>
+    <div class="floating-cover floating-2">
+      <img src="images/cover.png" alt="Yogurt">
+  </div>
+  </div>
+
+<script>
+  // Check user session on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    checkUserSession();
+  });
+
+  // Check if user is logged in
+  async function checkUserSession() {
+    try {
+      const response = await fetch('api/check_session.php');
+      const data = await response.json();
+      
+      if (data.success && data.user) {
+        // Update navigation to show user is logged in
+        document.getElementById('login-link').style.display = 'none';
+        document.getElementById('user-menu').style.display = 'block';
+        document.getElementById('user-name').textContent = `Hi, ${data.user.first_name}!`;
+      } else {
+        // Show login link if not logged in
+        document.getElementById('login-link').style.display = 'block';
+        document.getElementById('user-menu').style.display = 'none';
+      }
+    } catch (error) {
+      console.error('Error checking session:', error);
+      // Show login link on error
+      document.getElementById('login-link').style.display = 'block';
+      document.getElementById('user-menu').style.display = 'none';
+    }
+  }
+
+  // Logout function
+  async function logout() {
+    try {
+      const response = await fetch('api/logout.php', {
+        method: 'POST'
+      });
+      const data = await response.json();
+      
+      if (data.success) {
+        window.location.href = 'landing page.html';
+      }
+  } catch (error) {
+      console.error('Error during logout:', error);
+      // Force logout even if there's an error
+      window.location.href = 'landing page.html';
+    }
+  }
+
+  // Mobile menu functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navLinks = document.getElementById('nav-links');
+    
+    if (mobileMenuBtn && navLinks) {
+      mobileMenuBtn.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+        mobileMenuBtn.classList.toggle('active');
+      });
+
+      // Close mobile menu when clicking on a link
+      const navLinkElements = navLinks.querySelectorAll('.nav-link');
+      navLinkElements.forEach(link => {
+        link.addEventListener('click', function() {
+          navLinks.classList.remove('active');
+          mobileMenuBtn.classList.remove('active');
+        });
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!navLinks.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+          navLinks.classList.remove('active');
+          mobileMenuBtn.classList.remove('active');
+        }
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

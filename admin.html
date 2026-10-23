@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Yogee</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="images/yogee lugo.jpg" alt="Logo" class="logo">
+        <h2>Yogee Admin</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#dashboard" class="nav-item active" data-section="dashboard"><span>📊</span> Dashboard</a>
+        <a href="#reservations" class="nav-item" data-section="reservations"><span>📅</span> Reservations</a>
+        <a href="#packages" class="nav-item" data-section="packages"><span>📦</span> Packages</a>
+        <a href="#users" class="nav-item" data-section="users"><span>👥</span> Users</a>
+        <a href="#inventory" class="nav-item" data-section="inventory"><span>📋</span> Inventory</a>
+        <a href="#reports" class="nav-item" data-section="reports"><span>📈</span> Reports</a>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="#" id="logout-btn" class="logout-btn"><span>🚪</span> Logout</a>
+      </div>
+    </aside>
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="admin-header">
+        <h1 id="page-title">Dashboard</h1>
+        <div class="admin-user">
+          <span id="admin-name">Admin User</span>
+          <div class="admin-avatar">A</div>
+        </div>
+      </header>
+      <!-- Dashboard Section -->
+      <section id="dashboard" class="content-section active">
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-icon">📅</div><div class="stat-info"><h3 id="total-reservations">0</h3><p>Total Reservations</p></div></div>
+          <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-info"><h3 id="confirmed-reservations">0</h3><p>Confirmed</p></div></div>
+          <div class="stat-card"><div class="stat-icon">⏳</div><div class="stat-info"><h3 id="pending-reservations">0</h3><p>Pending</p></div></div>
+          <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-info"><h3 id="total-users">0</h3><p>Total Users</p></div></div>
+        </div>
+        <div class="charts-section">
+          <div class="chart-container">
+            <h3>Recent Reservations</h3>
+            <div class="table-container">
+              <table id="recent-reservations-table">
+                <thead><tr><th>Date</th><th>Customer</th><th>Package</th><th>Status</th><th>Total</th><th>Actions</th></tr></thead>
+                <tbody><!-- Data will be populated by JavaScript --></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="quick-actions">
+            <h3>Quick Actions</h3>
+            <div class="action-buttons">
+              <button class="btn-primary" onclick="admin.showSection('reservations')"><span>📅</span> View All Reservations</button>
+              <button class="btn-secondary" onclick="showAddPackageModal()"><span>📦</span> Add New Package</button>
+              <button class="btn-success" onclick="admin.showSection('inventory')"><span>📋</span> Check Inventory</button>
+              <button class="btn-warning" onclick="admin.showSection('reports')"><span>📈</span> Generate Reports</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Reservations Section -->
+      <section id="reservations" class="content-section">
+        <div class="section-header">
+          <h2>Manage Reservations</h2>
+          <div class="search-filter">
+            <input type="text" id="reservation-search" placeholder="Search reservations...">
+            <select id="status-filter">
+              <option value="">All Status</option>
+              <option value="pending">Pending</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-container">
+          <table id="reservations-table">
+            <thead><tr><th>ID</th><th>Customer</th><th>Email</th><th>Package</th><th>Date & Time</th><th>Guests</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody><!-- Data will be populated by JavaScript --></tbody>
+          </table>
+        </div>
+      </section>
+      <!-- Packages Section -->
+      <section id="packages" class="content-section">
+        <div class="section-header">
+          <h2>Manage Packages</h2>
+          <button class="btn-primary" onclick="showAddPackageModal()">Add New Package</button>
+        </div>
+        <div class="packages-grid" id="packages-grid"><!-- Packages will be populated by JavaScript --></div>
+      </section>
+      <!-- Users Section -->
+      <section id="users" class="content-section">
+        <div class="section-header">
+          <h2>Manage Users</h2>
+          <input type="text" id="user-search" placeholder="Search users...">
+        </div>
+        <div class="table-container">
+          <table id="users-table">
+            <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Registration Date</th><th>Actions</th></tr></thead>
+            <tbody><!-- Data will be populated by JavaScript --></tbody>
+          </table>
+        </div>
+      </section>
+      <!-- Inventory Section -->
+      <section id="inventory" class="content-section">
+        <div class="section-header">
+          <h2>Inventory Management</h2>
+          <button class="btn-primary" onclick="showAddItemModal()">Add New Item</button>
+        </div>
+        <div id="inventory-content"><!-- Content will be populated by JavaScript --></div>
+      </section>
+      <!-- Reports Section -->
+      <section id="reports" class="content-section">
+        <div class="section-header">
+          <h2>Reports & Analytics</h2>
+          <div class="date-range">
+            <input type="date" id="start-date">
+            <input type="date" id="end-date">
+            <button class="btn-secondary" onclick="generateReport()">Generate Report</button>
+          </div>
+        </div>
+        <div id="reports-content"><!-- Content will be populated by JavaScript --></div>
+      </section>
+    </main>
+  </div>
+  <!-- Modals -->
+  <div id="package-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Add/Edit Package</h3>
+        <button class="close-btn" onclick="closeModal('package-modal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="package-form">
+          <div class="form-group"><label for="package-name">Package Name:</label><input type="text" id="package-name" required></div>
+          <div class="form-group"><label for="package-description">Description:</label><textarea id="package-description" rows="3"></textarea></div>
+          <div class="form-group"><label for="package-price">Price:</label><input type="number" id="package-price" step="0.01" required></div>
+          <div class="form-group"><label for="package-max-guests">Max Guests:</label><input type="number" id="package-max-guests" required></div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeModal('package-modal')">Cancel</button>
+        <button class="btn-primary" onclick="savePackage()">Save Package</button>
+      </div>
+    </div>
+  </div>
+  <div id="inventory-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Add/Edit Inventory Item</h3>
+        <button class="close-btn" onclick="closeModal('inventory-modal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="inventory-form">
+          <div class="form-group"><label for="item-name">Item Name:</label><input type="text" id="item-name" required></div>
+          <div class="form-group"><label for="item-category">Category:</label><select id="item-category" required><option value="">Select Category</option><option value="Containers">Containers</option><option value="Ingredients">Ingredients</option><option value="Toppings">Toppings</option><option value="Utensils">Utensils</option><option value="Other">Other</option></select></div>
+          <div class="form-group"><label for="item-quantity">Quantity:</label><input type="number" id="item-quantity" min="0" required></div>
+          <div class="form-group"><label for="item-min-stock">Minimum Stock Level:</label><input type="number" id="item-min-stock" min="0"></div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeModal('inventory-modal')">Cancel</button>
+        <button class="btn-primary" onclick="saveInventoryItem()">Save Item</button>
+      </div>
+    </div>
+  </div>
+  <div id="reservation-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Reservation Details</h3>
+        <button class="close-btn" onclick="closeModal('reservation-modal')">&times;</button>
+      </div>
+      <div class="modal-body" id="reservation-details"><!-- Content will be populated by JavaScript --></div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeModal('reservation-modal')">Close</button>
+        <button class="btn-primary" onclick="updateReservationStatus()">Update Status</button>
+      </div>
+    </div>
+  </div>
+  <script src="admin.js"></script>
+</body>
+</html>

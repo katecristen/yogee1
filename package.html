@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yogee - Calamba Laguna</title>
+  <link rel="stylesheet" href="package.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo-container">
+      <img src="images/yogee lugo.jpg" alt="Logo" class="logo">
+      <span class="brand-name">Yogee - Calamba Laguna</span>
+    </div>
+    
+    <!-- Mobile menu button -->
+    <button class="mobile-menu-btn" id="mobile-menu-btn">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+      <nav class="nav-links" id="nav-links">
+      <a href="landing page.html" class="nav-link">Home</a>
+      <a href="abus.html" class="nav-link">About Us</a>
+      <a href="package.html" class="nav-link highlight">Packages</a>
+      <a href="Reservation.html" class="nav-link">Reservation</a>
+      <a href="Login.html" class="nav-link">Log In</a>
+    </nav>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <h1>Sweeten Your Event with Yogee</h1>
+      <p>Choose from our premium packages to make your celebration deliciously unforgettable.</p>
+      <img src="images/Banner.png" alt="Yogurt Banner" class="hero-image">
+    </div>
+  </section>
+
+ <!-- Categories -->
+<section class="categories">
+  <h2 class="subtitle">YOGURT BAR PACKAGES</h2>
+  <div class="category-grid">
+    <div class="category-card" onclick="showPopup('Package 1')">
+      <img src="images/package1.html.png" alt="Package 1">
+      <h3>Package 1</h3>
+    </div>
+    <div class="category-card" onclick="showPopup('Package 2')">
+      <img src="images/package1.html.png" alt="Package 2">
+      <h3>Package 2</h3>
+    </div>
+    <div class="category-card" onclick="showPopup('Package 3')">
+      <img src="images/package1.html.png" alt="Package 3">
+      <h3>Package 3</h3>
+    </div>
+  </div>
+</section>
+
+
+  <section class="inclusion-section">
+  <h2 class="section-title">INCLUSIONS</h2>
+
+  <div class="inclusion-wrapper">
+    <img src="images/left-removebg-preview.png" class="side-img left-img" alt="Left Yogurt">
+
+    <div class="inclusion-main">
+      <p class="setup-info">
+        <strong>4 Hours Set-Up Time | Booth Set-Up | Staffing Included</strong>
+      </p>
+
+      <div class="stats">
+        <div class="info-box">
+          <h3>18</h3>
+          <p>Available Toppings</p>
+        </div>
+        <div class="info-box">
+          <h3>10</h3>
+          <p>Available Syrups</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Static Cards Section -->
+    <div class="toppings-syrups-cards">
+      <div class="static-card">
+        <div class="card-header-static">
+          <h3>🧁 Toppings</h3>
+        </div>
+        <div class="card-content-static">
+          <div class="option-group">
+            <h4>Classic Toppings</h4>
+            <div class="options-grid">
+              <span class="option-badge classic">Marshmallows</span>
+              <span class="option-badge classic">Brownies</span>
+              <span class="option-badge classic">Cornflakes</span>
+              <span class="option-badge classic">Crushed Graham</span>
+              <span class="option-badge classic">Crushed Oreos</span>
+              <span class="option-badge classic">Butterscotch</span>
+              <span class="option-badge classic">Choco Chips</span>
+              <span class="option-badge classic">Sprinkles</span>
+              <span class="option-badge classic">Strawberry Bobba</span>
+              <span class="option-badge classic">Coconut Chips</span>
+              <span class="option-badge classic">Cashew Nuts</span>
+            </div>
+          </div>
+          <div class="option-group">
+            <h4>Premium Toppings</h4>
+            <div class="options-grid">
+              <span class="option-badge premium">Biscoff Biscuits</span>
+              <span class="option-badge premium">Granola</span>
+              <span class="option-badge premium">Dried Cranberries</span>
+              <span class="option-badge premium">Mochi</span>
+              <span class="option-badge premium">Alcapone</span>
+              <span class="option-badge premium">Roasted Almond</span>
+              <span class="option-badge premium">Pistachios</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="static-card">
+        <div class="card-header-static">
+          <h3>🍯 Syrups</h3>
+        </div>
+        <div class="card-content-static">
+          <div class="option-group">
+            <h4>Classic Syrups</h4>
+            <div class="options-grid">
+              <span class="option-badge classic">Blueberry Syrup</span>
+              <span class="option-badge classic">Strawberry Syrup</span>
+              <span class="option-badge classic">Mango Syrup</span>
+              <span class="option-badge classic">Strawberry Crunch</span>
+              <span class="option-badge classic">Matcha Crunch</span>
+              <span class="option-badge classic">Chocolate Crunch</span>
+            </div>
+          </div>
+          <div class="option-group">
+            <h4>Premium Syrups</h4>
+            <div class="options-grid">
+              <span class="option-badge premium">Caramel Syrup</span>
+              <span class="option-badge premium">Butterscotch</span>
+              <span class="option-badge premium">Biscoff Sauce</span>
+              <span class="option-badge premium">Chocolate Syrup</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <img src="images/rightimg.png" class="side-img right-img" alt="Right Yogurt">
+  </div>
+
+  <div class="addons-section">
+    <h3>ADD-ONS:</h3>
+    <ul>
+      <li>₱350 for an extra fruit option</li>
+      <li>₱350 for extra classic sauce or topping</li>
+      <li>₱500 per additional hour</li>
+      <li>₱550 additional for premium sauce or topping</li>
+    </ul>
+    <p class="note">Prices may vary for locations outside Metro Manila.</p>
+    <p class="note">Transpo Fee: ₱2500 (within Metro Manila only)</p>
+    <p class="important-note">
+      NOTE: A non-refundable reservation fee of ₱2,000 is required to reserve a slot.
+    </p>
+  </div>
+</section>
+
+
+
+  <!-- Modal HTML -->
+  <div id="popup-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <img id="modal-image" src="" alt="Package Image" />
+      <h3 id="modal-title"></h3>
+      <p id="modal-description"></p>
+    </div>
+  </div>
+
+<script>
+  // Check user session on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    checkUserSession();
+  });
+
+  // Check if user is logged in
+  async function checkUserSession() {
+    try {
+      const response = await fetch('api/check_session.php');
+      const data = await response.json();
+      
+      if (data.success && data.user) {
+        // Update navigation to show user is logged in
+        document.getElementById('login-link').style.display = 'none';
+        document.getElementById('user-menu').style.display = 'block';
+        document.getElementById('user-name').textContent = `Hi, ${data.user.first_name}!`;
+      } else {
+        // Show login link if not logged in
+        document.getElementById('login-link').style.display = 'block';
+        document.getElementById('user-menu').style.display = 'none';
+      }
+    } catch (error) {
+      console.error('Error checking session:', error);
+      // Show login link on error
+      document.getElementById('login-link').style.display = 'block';
+      document.getElementById('user-menu').style.display = 'none';
+    }
+  }
+
+  // Logout function
+  async function logout() {
+    try {
+      const response = await fetch('api/logout.php', {
+        method: 'POST'
+      });
+      const data = await response.json();
+      
+      if (data.success) {
+        window.location.href = 'landing page.html';
+      }
+    } catch (error) {
+      console.error('Error during logout:', error);
+      // Force logout even if there's an error
+      window.location.href = 'landing page.html';
+    }
+  }
+
+  // Remove all expandable card functionality - keeping only modal functions
+  function showPopup(packageName) {
+    const modal = document.getElementById("popup-modal");
+    const modalImage = document.getElementById("modal-image");
+    const modalTitle = document.getElementById("modal-title");
+    const modalDescription = document.getElementById("modal-description");
+
+    let imageSrc = "images/package1.html.png"; // same image for now
+    let title = "";
+    let desc = "";
+
+    if (packageName === "Package 1") {
+      title = "INTRODUCTORY PRICE: PhP 10,999";
+      desc = `
+        • 2 CHOICES OF SAUCE (1 classic, 1 premium)<br>
+        • 4 CHOICES OF TOPPINGS (2 classic, 2 premium)<br>
+        • 2 CHOICES OF FRUITS
+      `;
+    } else if (packageName === "Package 2") {
+      title = "INTRODUCTORY PRICE: PhP 13,999";
+      desc = `
+        • 4 CHOICES OF SAUCE (2 classic, 2 premium)<br>
+        • 6 CHOICES OF TOPPINGS (3 classic, 3 premium)<br>
+        • 3 CHOICES OF FRUITS
+      `;
+    } else if (packageName === "Package 3") {
+      title = "INTRODUCTORY PRICE: PhP 16,999";
+      desc = `
+        • 5 CHOICES OF SAUCE (3 classic, 2 premium)<br>
+        • 8 CHOICES OF TOPPINGS (4 classic, 4 premium)<br>
+        • 3 CHOICES OF FRUITS
+      `;
+    }
+
+    modalImage.src = imageSrc;
+    modalTitle.textContent = title;
+    modalDescription.innerHTML = desc;
+
+    modal.style.display = "flex";
+  }
+  function closeModal() {
+    document.getElementById("popup-modal").style.display = "none";
+  }
+
+  // Mobile menu functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navLinks = document.getElementById('nav-links');
+    
+    if (mobileMenuBtn && navLinks) {
+      mobileMenuBtn.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+        mobileMenuBtn.classList.toggle('active');
+      });
+
+      // Close mobile menu when clicking on a link
+      const navLinkElements = navLinks.querySelectorAll('.nav-link');
+      navLinkElements.forEach(link => {
+        link.addEventListener('click', function() {
+          navLinks.classList.remove('active');
+          mobileMenuBtn.classList.remove('active');
+        });
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!navLinks.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+          navLinks.classList.remove('active');
+          mobileMenuBtn.classList.remove('active');
+        }
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

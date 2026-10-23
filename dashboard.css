@@ -1,0 +1,590 @@
+/* Dashboard Styles */
+:root {
+  --primary: #9373da;
+  --secondary: #b494da;
+  --accent: #7c5db8;
+  --background: #f8f5f7;
+  --white: #ffffff;
+  --text-dark: #1f2937;
+  --text-light: #6b7280;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --border: #e5e7eb;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, var(--background), #e0d6f0);
+  color: var(--text-dark);
+  min-height: 100vh;
+}
+
+/* Header Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #9373da;
+}
+
+.brand-name {
+  font-weight: bold;
+  font-size: 1.125rem;
+  color: #9373da;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-link {
+  color: #374151;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.nav-link:hover {
+  color: #9373da;
+  background-color: rgba(147, 115, 218, 0.1);
+  transform: translateY(-1px);
+}
+
+.nav-link.highlight {
+  color: #9373da;
+  background-color: rgba(147, 115, 218, 0.1);
+  font-weight: 600;
+}
+
+.nav-link.highlight::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(90deg, #9373da, #8571aa);
+  border-radius: 1px;
+}
+
+/* Mobile menu button */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1001;
+}
+
+.mobile-menu-btn span {
+  width: 25px;
+  height: 3px;
+  background-color: #9373da;
+  margin: 3px 0;
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+.mobile-menu-btn.active span:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.mobile-menu-btn.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-btn.active span:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+.logout-btn {
+  background: var(--danger);
+  color: var(--white) !important;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.dashboard-header h1 {
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-header p {
+  color: var(--text-light);
+  font-size: 1.1rem;
+}
+
+/* Dashboard Content */
+.dashboard-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Profile Section */
+.profile-section {
+  grid-column: 1;
+}
+
+.profile-card {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(147, 115, 218, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.profile-card h2 {
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.profile-card p {
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.profile-card strong {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+/* Quick Actions */
+.quick-actions {
+  grid-column: 1;
+}
+
+.quick-actions h2 {
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--white);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text-dark);
+  box-shadow: 0 4px 8px rgba(147, 115, 218, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(147, 115, 218, 0.2);
+}
+
+.action-icon {
+  font-size: 1.5rem;
+}
+
+/* Reservations Section */
+.reservations-section {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
+.reservations-section h2 {
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.reservations-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.reservation-card {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(147, 115, 218, 0.1);
+  border-left: 4px solid var(--primary);
+}
+
+.reservation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.reservation-header h3 {
+  color: var(--primary);
+  font-size: 1.25rem;
+}
+
+.status-badges {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.status-badge, .payment-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.status-badge.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-badge.confirmed {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-badge.cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.status-badge.completed {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.payment-badge.unpaid {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.payment-badge.partial {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.payment-badge.paid {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.reservation-details p {
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+}
+
+.reservation-details strong {
+  font-weight: 600;
+}
+
+.reservation-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+/* Buttons */
+.btn-primary, .btn-secondary, .btn-danger {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background: var(--accent);
+}
+
+.btn-secondary {
+  background: var(--border);
+  color: var(--text-dark);
+}
+
+.btn-secondary:hover {
+  background: #d1d5db;
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: var(--white);
+}
+
+.btn-danger:hover {
+  background: #dc2626;
+}
+
+/* Loading and Error States */
+.loading, .error, .no-reservations {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-light);
+}
+
+.error {
+  color: var(--danger);
+}
+
+.no-reservations {
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(147, 115, 218, 0.1);
+}
+
+.no-reservations p {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 1.5rem;
+  color: var(--text-light);
+  cursor: pointer;
+}
+
+.close:hover {
+  color: var(--text-dark);
+}
+
+.modal-content h3 {
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.form-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.form-buttons button {
+  flex: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .dashboard-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .reservations-section {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+  }
+  
+  .mobile-menu-btn {
+    display: flex;
+  }
+  
+  .nav-links {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    height: 100vh;
+    background: #fff;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 6rem 2rem 2rem;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: left 0.3s ease;
+    gap: 1rem;
+  }
+  
+  .nav-links.active {
+    left: 0;
+  }
+  
+  .nav-link {
+    width: 100%;
+    padding: 1rem 0;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #f3f4f6;
+    border-radius: 0;
+  }
+  
+  .nav-link:hover {
+    background-color: rgba(147, 115, 218, 0.05);
+    transform: none;
+  }
+  
+  .brand-name {
+    font-size: 1.1rem;
+  }
+  
+  .logo {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.75rem;
+  }
+  
+  .nav-links {
+    width: 90%;
+    padding: 5rem 1.5rem 2rem;
+  }
+  
+  .brand-name {
+    font-size: 1rem;
+  }
+  
+  .logo {
+    height: 2rem;
+    width: 2rem;
+  }
+  
+  .profile-card, .modal-content {
+    padding: 1.5rem;
+  }
+}
+/* Reservation documents use the existing dashboard's spacing and controls. */
+.attachment-section { max-width: 1100px; margin: 24px auto; padding: 24px; }
+.attachment-section form { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.attachment-section select, .attachment-section input { max-width: 100%; padding: 8px; }
+.attachment-section li { margin: 12px 0; }
+#live-status { font-size: .9rem; }

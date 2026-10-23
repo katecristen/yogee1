@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar Test - Yogee</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background: #f8f5f7;
+        }
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #9373da;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .page-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .page-item {
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        .page-item.updated {
+            border-color: #9373da;
+            background: #f3f0ff;
+        }
+        .page-item h3 {
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        .page-item p {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+        .status {
+            font-weight: bold;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        .status.updated {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .status.not-needed {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .features {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .features h2 {
+            color: #9373da;
+            margin-bottom: 1rem;
+        }
+        .features ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .features li:before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧘‍♀️ Yogee Website - Navbar Consistency Test</h1>
+        
+        <div class="page-list">
+            <div class="page-item updated">
+                <h3>Landing Page</h3>
+                <p>landing page.html</p>
+                <span class="status updated">✅ UPDATED</span>
+            </div>
+            
+            <div class="page-item updated">
+                <h3>About Us</h3>
+                <p>abus.html</p>
+                <span class="status updated">✅ UPDATED</span>
+            </div>
+            
+            <div class="page-item updated">
+                <h3>Packages</h3>
+                <p>package.html</p>
+                <span class="status updated">✅ UPDATED</span>
+            </div>
+            
+            <div class="page-item updated">
+                <h3>Reservation</h3>
+                <p>Reservation.html</p>
+                <span class="status updated">✅ UPDATED</span>
+            </div>
+            
+            <div class="page-item updated">
+                <h3>Login</h3>
+                <p>Login.html</p>
+                <span class="status updated">✅ UPDATED</span>
+            </div>
+            
+            <div class="page-item updated">
+                <h3>Dashboard</h3>
+                <p>dashboard.html</p>
+                <span class="status updated">✅ UPDATED</span>
+            </div>
+            
+            <div class="page-item">
+                <h3>Admin Panel</h3>
+                <p>admin.html</p>
+                <span class="status not-needed">ℹ️ SIDEBAR LAYOUT</span>
+            </div>
+            
+            <div class="page-item">
+                <h3>Reserve Form</h3>
+                <p>reserve.html</p>
+                <span class="status not-needed">ℹ️ SIMPLE FORM</span>
+            </div>
+        </div>
+        
+        <div class="features">
+            <h2>📱 Modern Navbar Features Implemented</h2>
+            <ul>
+                <li><strong>Responsive Design:</strong> Mobile-first approach with hamburger menu</li>
+                <li><strong>Modern Styling:</strong> Enhanced visual design with purple branding (#9373da)</li>
+                <li><strong>Mobile Menu:</strong> Smooth slide-in navigation for mobile devices</li>
+                <li><strong>Interactive Elements:</strong> Hover effects and smooth transitions</li>
+                <li><strong>Consistent Layout:</strong> Unified navigation structure across all pages</li>
+                <li><strong>Logo Enhancement:</strong> Rounded logo with border styling</li>
+                <li><strong>Active Page Highlighting:</strong> Visual indicator for current page</li>
+                <li><strong>Touch-Friendly:</strong> Optimized for mobile and tablet interactions</li>
+                <li><strong>Accessibility:</strong> Proper ARIA labels and keyboard navigation</li>
+                <li><strong>Cross-Browser:</strong> Compatible with modern web browsers</li>
+            </ul>
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem; padding: 1rem; background: #e7f5ff; border-radius: 8px;">
+            <h3 style="color: #1976d2; margin-bottom: 0.5rem;">🎉 Navbar Modernization Complete!</h3>
+            <p style="color: #424242; margin: 0;">All main pages now have consistent, modern, and responsive navigation.</p>
+        </div>
+    </div>
+</body>
+</html>

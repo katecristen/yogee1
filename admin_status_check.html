@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard Status Check</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-result {
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 4px;
+            border-left: 4px solid;
+        }
+        .success {
+            background: #d1fae5;
+            border-color: #059669;
+            color: #065f46;
+        }
+        .error {
+            background: #fee2e2;
+            border-color: #dc2626;
+            color: #991b1b;
+        }
+        .warning {
+            background: #fef3c7;
+            border-color: #d97706;
+            color: #92400e;
+        }
+        .info {
+            background: #dbeafe;
+            border-color: #2563eb;
+            color: #1e40af;
+        }
+        .test-button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+        .test-button:hover {
+            background: #2563eb;
+        }
+        pre {
+            background: #1f2937;
+            color: #f3f4f6;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.875rem;
+        }
+        .nav-test {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        .nav-button {
+            background: #6b7280;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+        .nav-button.active {
+            background: #059669;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔧 Admin Dashboard Status Check</h1>
+        <p>This tool tests all the admin dashboard functionality to ensure everything is working correctly.</p>
+        
+        <div id="results"></div>
+        
+        <h2>Quick Tests</h2>
+        <div>
+            <button class="test-button" onclick="testAPIs()">Test All APIs</button>
+            <button class="test-button" onclick="testNavigation()">Test Navigation</button>
+            <button class="test-button" onclick="testModals()">Test Modals</button>
+            <button class="test-button" onclick="testDataLoading()">Test Data Loading</button>
+            <button class="test-button" onclick="runFullTest()">Run Full Test Suite</button>
+        </div>
+        
+        <h2>Navigation Test</h2>
+        <p>Click these buttons to test admin panel navigation:</p>
+        <div class="nav-test">
+            <button class="nav-button" onclick="testNavTo('dashboard')">Dashboard</button>
+            <button class="nav-button" onclick="testNavTo('reservations')">Reservations</button>
+            <button class="nav-button" onclick="testNavTo('packages')">Packages</button>
+            <button class="nav-button" onclick="testNavTo('users')">Users</button>
+            <button class="nav-button" onclick="testNavTo('inventory')">Inventory</button>
+            <button class="nav-button" onclick="testNavTo('reports')">Reports</button>
+        </div>
+        
+        <h2>Admin Panel Link</h2>
+        <p><a href="admin.html" target="_blank" style="color: #3b82f6; text-decoration: none;">🔗 Open Admin Dashboard</a></p>
+        
+        <h2>Live Console Output</h2>
+        <pre id="console-output">Waiting for tests...</pre>
+    </div>
+
+    <script>
+        let consoleOutput = '';
+        
+        // Capture console logs
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalWarn = console.warn;
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            consoleOutput += 'LOG: ' + args.join(' ') + '\n';
+            updateConsoleOutput();
+        };
+        
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            consoleOutput += 'ERROR: ' + args.join(' ') + '\n';
+            updateConsoleOutput();
+        };
+        
+        console.warn = function(...args) {
+            originalWarn.apply(console, args);
+            consoleOutput += 'WARN: ' + args.join(' ') + '\n';
+            updateConsoleOutput();
+        };
+        
+        function updateConsoleOutput() {
+            document.getElementById('console-output').textContent = consoleOutput;
+            document.getElementById('console-output').scrollTop = document.getElementById('console-output').scrollHeight;
+        }
+        
+        function addResult(type, title, message) {
+            const resultsDiv = document.getElementById('results');
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `test-result ${type}`;
+            resultDiv.innerHTML = `<strong>${title}</strong><br>${message}`;
+            resultsDiv.appendChild(resultDiv);
+        }
+        
+        async function testAPIs() {
+            addResult('info', 'API Tests', 'Testing all admin APIs...');
+            
+            const apis = [
+                'api/admin_stats.php',
+                'api/admin_reservations.php',
+                'api/admin_packages.php',
+                'api/admin_users.php',
+                'api/check_admin_session.php'
+            ];
+            
+            let passedTests = 0;
+            
+            for (let api of apis) {
+                try {
+                    const response = await fetch(api);
+                    if (response.ok) {
+                        const data = await response.json();
+                        addResult('success', `✅ ${api}`, `API responded successfully. Data: ${JSON.stringify(data).substring(0, 100)}...`);
+                        passedTests++;
+                    } else {
+                        addResult('error', `❌ ${api}`, `HTTP Error: ${response.status} ${response.statusText}`);
+                    }
+                } catch (error) {
+                    addResult('error', `❌ ${api}`, `Network Error: ${error.message}`);
+                }
+            }
+            
+            addResult('info', 'API Test Summary', `${passedTests}/${apis.length} APIs passed`);
+        }
+        
+        function testNavigation() {
+            addResult('info', 'Navigation Test', 'Testing admin panel navigation...');
+            
+            // Open admin panel in new window
+            const adminWindow = window.open('admin.html', '_blank');
+            
+            setTimeout(() => {
+                if (adminWindow) {
+                    addResult('success', '✅ Admin Panel', 'Admin panel opened successfully');
+                    
+                    // Try to access the admin object
+                    try {
+                        if (adminWindow.admin) {
+                            addResult('success', '✅ Admin Object', 'Admin JavaScript object is accessible');
+                        } else {
+                            addResult('warning', '⚠️ Admin Object', 'Admin object not yet initialized (this is normal)');
+                        }
+                    } catch (e) {
+                        addResult('error', '❌ Admin Object', `Cannot access admin object: ${e.message}`);
+                    }
+                } else {
+                    addResult('error', '❌ Admin Panel', 'Failed to open admin panel (popup blocked?)');
+                }
+            }, 2000);
+        }
+        
+        function testNavTo(section) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.nav-button').forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+            
+            addResult('info', 'Navigation', `Testing navigation to ${section} section...`);
+            
+            // Try to send message to admin panel if it exists
+            try {
+                const adminWindows = [];
+                // This is a simplified test - in real implementation we'd need to track opened windows
+                addResult('warning', '⚠️ Navigation', `Navigation to ${section} - Please check admin panel manually`);
+            } catch (error) {
+                addResult('error', '❌ Navigation', `Navigation failed: ${error.message}`);
+            }
+        }
+        
+        function testModals() {
+            addResult('info', 'Modal Test', 'Testing modal functionality...');
+            
+            // Test if we can access modal elements
+            const adminWindow = window.open('admin.html', '_blank');
+            
+            setTimeout(() => {
+                try {
+                    if (adminWindow && adminWindow.document) {
+                        const modals = adminWindow.document.querySelectorAll('.modal');
+                        addResult('success', '✅ Modals', `Found ${modals.length} modal elements in admin panel`);
+                        
+                        // Test modal functions
+                        if (adminWindow.showAddPackageModal) {
+                            addResult('success', '✅ Modal Functions', 'Modal functions are accessible');
+                        } else {
+                            addResult('warning', '⚠️ Modal Functions', 'Modal functions not yet loaded');
+                        }
+                    }
+                } catch (e) {
+                    addResult('error', '❌ Modal Test', `Error accessing modals: ${e.message}`);
+                }
+            }, 3000);
+        }
+        
+        async function testDataLoading() {
+            addResult('info', 'Data Loading Test', 'Testing data loading functionality...');
+            
+            try {
+                // Test stats loading
+                const statsResponse = await fetch('api/admin_stats.php');
+                if (statsResponse.ok) {
+                    const stats = await statsResponse.json();
+                    addResult('success', '✅ Stats Data', `Loaded stats: ${Object.keys(stats).join(', ')}`);
+                } else {
+                    addResult('error', '❌ Stats Data', `Failed to load stats: ${statsResponse.status}`);
+                }
+                
+                // Test reservations loading
+                const reservationsResponse = await fetch('api/admin_reservations.php');
+                if (reservationsResponse.ok) {
+                    const reservations = await reservationsResponse.json();
+                    addResult('success', '✅ Reservations Data', `Loaded ${Array.isArray(reservations) ? reservations.length : 'unknown'} reservations`);
+                } else {
+                    addResult('error', '❌ Reservations Data', `Failed to load reservations: ${reservationsResponse.status}`);
+                }
+                
+            } catch (error) {
+                addResult('error', '❌ Data Loading', `Error loading data: ${error.message}`);
+            }
+        }
+        
+        async function runFullTest() {
+            addResult('info', 'Full Test Suite', '🚀 Running comprehensive admin dashboard test...');
+            
+            // Clear previous results
+            document.getElementById('results').innerHTML = '';
+            consoleOutput = '';
+            updateConsoleOutput();
+            
+            // Run all tests
+            await testAPIs();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            await testDataLoading();
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            testNavigation();
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            testModals();
+            
+            addResult('success', '🎉 Test Complete', 'All admin dashboard tests have been executed. Check the results above.');
+        }
+        
+        // Auto-run basic test on page load
+        window.addEventListener('load', () => {
+            console.log('Admin Dashboard Status Check loaded');
+            addResult('info', 'Status Check', 'Admin Dashboard Status Check tool is ready. Click the buttons above to run tests.');
+        });
+    </script>
+</body>
+</html>

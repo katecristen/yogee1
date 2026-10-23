@@ -1,0 +1,35 @@
+<head>
+  <title>Reservation Form</title>
+  <link rel="stylesheet" href="reserve.css" />
+</head>
+<body>
+  <div class="form-container">
+    <h1>TO CONFIRM YOUR BOOKING<br>PLEASE PROVIDE THE FOLLOWING:</h1>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+ 
+      <label for="contact">Contact Number:</label>
+      <input type="tel" id="contact" name="contact" required />
+ 
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" name="email" required />
+ 
+      <label for="datetime">Event Date and Time:</label>
+      <input type="datetime-local" id="datetime" name="datetime" required />      <label for="packages">Selected Packages:</label>
+      <select id="packages" name="packages" required>
+        <option value="">-- Select a Package --</option>
+        <option value="basic">Package 1</option>
+        <option value="standard">Package 2</option>
+        <option value="premium">Package 3</option>
+      </select>
+
+      <label for="notes">Additional Notes:</label>
+      <input type="text" id="notes" name="notes" />
+ 
+ 
+      <button type="submit">Confirm Booking</button>
+    </form>
+  </div>
+</body>
+</html>

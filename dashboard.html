@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Yogee Calamba Laguna</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>  <header class="navbar">
+    <div class="logo-container">
+      <img src="images/yogee lugo.jpg" alt="Yogee Logo" class="logo">
+      <span class="brand-name">Yogee - Calamba Laguna</span>
+    </div>
+    
+    <!-- Mobile menu button -->
+    <button class="mobile-menu-btn" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    
+    <nav class="nav-links">
+      <a href="landing page.html" class="nav-link">Home</a>
+      <a href="abus.html" class="nav-link">About Us</a>  
+      <a href="package.html" class="nav-link">Packages</a>
+      <a href="Reservation.html" class="nav-link">Make Reservation</a>
+      <a href="#" id="user-name-display" class="nav-link highlight">Welcome, User!</a>
+      <a href="#" onclick="logout()" class="nav-link logout-btn">Logout</a>
+    </nav>
+  </header>
+
+  <main class="dashboard-container">
+    <div class="dashboard-header">
+      <h1>My Dashboard</h1>
+      <p>Manage your reservations and account information</p>
+    </div>
+
+    <div class="dashboard-content">
+      <!-- User Profile Section -->
+      <section class="profile-section">
+        <div class="profile-card">
+          <h2>My Profile</h2>
+          <div id="profile-info">
+            <p><strong>Name:</strong> <span id="profile-name">Loading...</span></p>
+            <p><strong>Email:</strong> <span id="profile-email">Loading...</span></p>
+            <p><strong>Phone:</strong> <span id="profile-phone">Loading...</span></p>
+            <p><strong>Member Since:</strong> <span id="profile-member-since">Loading...</span></p>
+          </div>
+          <button onclick="editProfile()" class="btn-secondary">Edit Profile</button>
+        </div>
+      </section>
+
+      <!-- Quick Actions -->
+      <section class="quick-actions">
+        <h2>Quick Actions</h2>
+        <div class="action-buttons">
+          <a href="Reservation.html" class="action-btn">
+            <div class="action-icon">📅</div>
+            <span>Make New Reservation</span>
+          </a>
+          <a href="package.html" class="action-btn">
+            <div class="action-icon">📦</div>
+            <span>View Packages</span>
+          </a>
+          <a href="#" onclick="loadReservations()" class="action-btn">
+            <div class="action-icon">🔄</div>
+            <span>Refresh Reservations</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Reservations Section -->
+      <section class="reservations-section">
+        <h2>My Reservations</h2>
+        <p id="live-status" role="status">Connecting live updates…</p>
+        <div id="reservations-container">
+          <div class="loading">Loading your reservations...</div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Edit Profile Modal -->
+  <div id="edit-profile-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close" onclick="closeEditProfile()">&times;</span>
+      <h3>Edit Profile</h3>
+      <form id="edit-profile-form">
+        <div class="form-group">
+          <label for="edit-first-name">First Name:</label>
+          <input type="text" id="edit-first-name" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-last-name">Last Name:</label>
+          <input type="text" id="edit-last-name" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-phone">Phone:</label>
+          <input type="tel" id="edit-phone" pattern="[0-9]{11}">
+        </div>
+        <div class="form-group">
+          <label for="edit-dob">Date of Birth:</label>
+          <input type="date" id="edit-dob">
+        </div>
+        <div class="form-buttons">
+          <button type="submit" class="btn-primary">Save Changes</button>
+          <button type="button" onclick="closeEditProfile()" class="btn-secondary">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let currentUser = null;
+
+    // Check if user is logged in
+    document.addEventListener('DOMContentLoaded', function() {
+      checkSession();
+    });
+
+    async function checkSession() {
+      try {
+        const response = await fetch('api/check_session.php');
+        const data = await response.json();
+        
+        if (!data.success || !data.user) {
+          alert('Please log in to access the dashboard.');
+          window.location.href = 'Login.html';
+          return;
+        }
+
+        currentUser = data.user;
+        displayUserInfo(data.user);
+        loadReservations();
+        
+      } catch (error) {
+        console.error('Error checking session:', error);
+        window.location.href = 'Login.html';
+      }
+    }
+
+    function displayUserInfo(user) {
+      document.getElementById('user-name-display').textContent = `Welcome, ${user.first_name}!`;
+      document.getElementById('profile-name').textContent = `${user.first_name} ${user.last_name}`;
+      document.getElementById('profile-email').textContent = user.email;
+      document.getElementById('profile-phone').textContent = user.phone || 'Not provided';
+      
+      const memberSince = new Date(user.created_at).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      document.getElementById('profile-member-since').textContent = memberSince;
+    }
+
+    async function loadReservations() {
+      const container = document.getElementById('reservations-container');
+      container.innerHTML = '<div class="loading">Loading your reservations...</div>';
+
+      try {
+        const response = await fetch('api/reservation.php?action=user_reservations');
+        const data = await response.json();
+
+        if (data.success) {
+          displayReservations(data.reservations);
+        } else {
+          container.innerHTML = '<div class="error">Error loading reservations: ' + data.message + '</div>';
+        }
+      } catch (error) {
+        console.error('Error loading reservations:', error);
+        container.innerHTML = '<div class="error">Error loading reservations. Please try again.</div>';
+      }
+    }
+
+    function displayReservations(reservations) {
+      const container = document.getElementById('reservations-container');
+      
+      if (reservations.length === 0) {
+        container.innerHTML = `
+          <div class="no-reservations">
+            <p>You haven't made any reservations yet.</p>
+            <a href="Reservation.html" class="btn-primary">Make Your First Reservation</a>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '<div class="reservations-grid">';
+      reservations.forEach(reservation => {
+        const eventDate = new Date(reservation.event_datetime).toLocaleDateString('en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+
+        const statusClass = reservation.status.toLowerCase();
+        const paymentStatusClass = reservation.payment_status.toLowerCase();
+
+        html += `
+          <div class="reservation-card">
+            <div class="reservation-header">
+              <h3>${reservation.package_name}</h3>
+              <div class="status-badges">
+                <span class="status-badge ${statusClass}">${reservation.status}</span>
+                <span class="payment-badge ${paymentStatusClass}">${reservation.payment_status}</span>
+              </div>
+            </div>
+            <div class="reservation-details">
+              <p><strong>Date:</strong> ${eventDate}</p>
+              <p><strong>Contact:</strong> ${reservation.contact_number}</p>
+              <p><strong>Total Amount:</strong> ₱${parseFloat(reservation.total_amount).toLocaleString()}</p>
+              <p><strong>Reservation ID:</strong> #${reservation.reservation_id}</p>
+            </div>
+            <div class="reservation-actions">
+              ${reservation.status === 'pending' ? 
+                `<button onclick="cancelReservation(${reservation.reservation_id})" class="btn-danger">Cancel</button>` : 
+                ''
+              }
+              <button onclick="viewReservationDetails(${reservation.reservation_id})" class="btn-secondary">View Details</button>
+            </div>
+          </div>
+        `;
+      });
+      html += '</div>';
+      
+      container.innerHTML = html;
+    }
+
+    async function cancelReservation(reservationId) {
+      if (!confirm('Are you sure you want to cancel this reservation? This action cannot be undone.')) {
+        return;
+      }
+
+      try {
+        const response = await fetch('api/reservation.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            action: 'cancel',
+            reservation_id: reservationId
+          })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          alert('Reservation cancelled successfully.');
+          loadReservations(); // Reload the reservations
+        } else {
+          alert('Error: ' + data.message);
+        }
+      } catch (error) {
+        console.error('Error cancelling reservation:', error);
+        alert('An error occurred while cancelling the reservation.');
+      }
+    }
+
+    function viewReservationDetails(reservationId) {
+      // For now, just show an alert with the ID
+      // You could create a detailed view modal here
+      alert(`Viewing details for reservation #${reservationId}`);
+    }
+
+    function editProfile() {
+      // Pre-fill the form with current user data
+      document.getElementById('edit-first-name').value = currentUser.first_name;
+      document.getElementById('edit-last-name').value = currentUser.last_name;
+      document.getElementById('edit-phone').value = currentUser.phone || '';
+      document.getElementById('edit-dob').value = currentUser.date_of_birth || '';
+      
+      document.getElementById('edit-profile-modal').style.display = 'flex';
+    }
+
+    function closeEditProfile() {
+      document.getElementById('edit-profile-modal').style.display = 'none';
+    }
+
+    document.getElementById('edit-profile-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const formData = {
+        action: 'update_profile',
+        first_name: document.getElementById('edit-first-name').value,
+        last_name: document.getElementById('edit-last-name').value,
+        phone: document.getElementById('edit-phone').value,
+        date_of_birth: document.getElementById('edit-dob').value
+      };
+
+      try {
+        const response = await fetch('api/user_update.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          alert('Profile updated successfully!');
+          closeEditProfile();
+          checkSession(); // Reload user data
+        } else {
+          alert('Error: ' + data.message);
+        }
+      } catch (error) {
+        console.error('Error updating profile:', error);
+        alert('An error occurred while updating your profile.');
+      }
+    });
+
+    async function logout() {
+      try {
+        const response = await fetch('api/logout.php', {
+          method: 'POST'
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          alert('Logged out successfully!');
+          window.location.href = 'landing page.html';
+        } else {
+          // Force logout even if server request fails
+          window.location.href = 'landing page.html';
+        }      } catch (error) {
+        console.error('Error during logout:', error);
+        // Force logout even if there's an error
+        window.location.href = 'landing page.html';
+      }
+    }
+
+    // Mobile menu functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+      const navLinks = document.querySelector('.nav-links');
+      
+      if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', function() {
+          navLinks.classList.toggle('active');
+          mobileMenuBtn.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a nav link
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.addEventListener('click', function() {
+            navLinks.classList.remove('active');
+            mobileMenuBtn.classList.remove('active');
+          });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+          const isClickInsideNav = navLinks.contains(event.target);
+          const isClickOnMenuBtn = mobileMenuBtn.contains(event.target);
+          
+          if (!isClickInsideNav && !isClickOnMenuBtn && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+            mobileMenuBtn.classList.remove('active');
+          }
+        });
+      }
+    });
+  </script>
+  <section class="reservations-section attachment-section" aria-labelledby="attachment-heading">
+    <h2 id="attachment-heading">Reservation attachments</h2>
+    <p>Add a receipt or event document. PNG, JPEG, or PDF, up to 5 MB.</p>
+    <form id="attachment-form">
+      <label for="attachment-reservation">Reservation</label>
+      <select id="attachment-reservation" required></select>
+      <label for="attachment-file">File</label>
+      <input id="attachment-file" type="file" accept="image/png,image/jpeg,application/pdf" required>
+      <button type="submit" class="btn-primary" disabled>Upload attachment</button>
+    </form>
+    <p id="attachment-status" role="status"></p>
+    <ul id="attachment-list"></ul>
+  </section>
+  <script type="module" src="assets/neon.js"></script>
+</body>
+</html>

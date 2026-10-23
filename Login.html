@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yogee - Calamba Laguna</title>
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>  <header class="navbar">
+    <div class="logo-container">
+      <img src="images/yogee lugo.jpg" alt="Yogee Logo" class="logo">
+      <span class="brand-name">Yogee - Calamba Laguna</span>
+    </div>
+    
+    <!-- Mobile menu button -->
+    <button class="mobile-menu-btn" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    
+    <nav class="nav-links">
+      <a href="landing page.html" class="nav-link">Home</a>
+      <a href="abus.html" class="nav-link">About Us</a>
+      <a href="package.html" class="nav-link">Packages</a>
+      <a href="Reservation.html" class="nav-link">Reservation</a>
+      <a href="Login.html" class="nav-link highlight">Log In</a>
+    </nav>
+  </header>
+  
+  <div class="background-carousel">
+    <div class="scrolling-images">
+      <img src="images/page1.png" alt="Image 1">
+      <img src="images/page2.png" alt="Image 2">
+      <img src="images/page3.png" alt="Image 3">
+      <img src="images/page4.png" alt="Image 4">
+      <img src="images/page5.png" alt="Image 5">
+      <!-- repeat for seamless scrolling -->
+      <img src="images/page1.png" alt="Image 1">
+      <img src="images/page2.png" alt="Image 2">
+      <img src="images/page3.png" alt="Image 3">
+      <img src="images/page4.png" alt="Image 4">
+      <img src="images/page5.png" alt="Image 5">
+    </div>
+  </div>
+
+  <main class="form-wrapper">    <!-- Login Form -->
+    <form id="loginForm" class="auth-form" aria-label="Login form" novalidate>
+      <h2>Log In</h2>      <div class="login-fields">
+        <!-- Admin/User Toggle -->
+        <div class="field-group">
+          <div class="login-type-toggle">
+            <label class="toggle-option">
+              <input type="radio" name="loginType" value="user" checked onchange="toggleLoginType()">
+              <span>User Login</span>
+            </label>
+            <label class="toggle-option">
+              <input type="radio" name="loginType" value="admin" onchange="toggleLoginType()">
+              <span>Admin Login</span>
+            </label>
+          </div>
+        </div>
+        
+        <div class="field-group">
+          <label for="login-email" id="email-label">Email address</label>
+          <input type="email" id="login-email" name="email" placeholder="you@gmail.com" required autofocus />
+        </div>
+        <div class="field-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" name="password" placeholder="Enter your password" required />
+        </div>
+      </div>
+      
+      <button type="submit" class="login" id="login-btn">Log In</button>
+      
+      <div class="form-toggle">
+        <p>Don't have an account? <button type="button" class="toggle-btn" onclick="showRegister()">Sign Up</button></p>
+      </div>
+
+      <div class="footer">&copy; 2024 Yogee - Calamba Laguna. All rights reserved.</div>
+    </form>
+
+    <!-- Register Form -->
+    <form id="registerForm" class="auth-form" style="display: none;" aria-label="Register form" novalidate>
+      <h2>Sign Up</h2>
+      
+      <div class="register-fields">
+        <div class="field-group">
+          <label for="reg-first-name">First Name</label>
+          <input type="text" id="reg-first-name" name="firstName" placeholder="Enter your first name" required />
+        </div>
+        
+        <div class="field-group">
+          <label for="reg-last-name">Last Name</label>
+          <input type="text" id="reg-last-name" name="lastName" placeholder="Enter your last name" required />
+        </div>
+        
+        <div class="field-group full-width">
+          <label for="reg-email">Email address</label>
+          <input type="email" id="reg-email" name="email" placeholder="you@gmail.com" required />
+        </div>
+        
+        <div class="field-group">
+          <label for="reg-phone">Phone Number</label>
+          <input type="tel" id="reg-phone" name="phone" placeholder="09171234567" pattern="[0-9]{11}" />
+        </div>
+        
+        <div class="field-group">
+          <label for="reg-dob">Date of Birth</label>
+          <input type="date" id="reg-dob" name="dateOfBirth" />
+        </div>
+        
+        <div class="field-group">
+          <label for="reg-password">Password</label>
+          <input type="password" id="reg-password" name="password" placeholder="Create a password" required />
+        </div>
+        
+        <div class="field-group">
+          <label for="reg-confirm-password">Confirm Password</label>
+          <input type="password" id="reg-confirm-password" name="confirmPassword" placeholder="Confirm your password" required />
+        </div>
+      </div>
+      
+      <button type="submit" class="login">Create Account</button>
+      
+      <div class="form-toggle">
+        <p>Already have an account? <button type="button" class="toggle-btn" onclick="showLogin()">Log In</button></p>
+      </div>
+
+      <div class="footer">&copy; 2024 Yogee - Calamba Laguna. All rights reserved.</div>
+    </form>
+  </main>
+  <script>
+    function showRegister() {
+      document.getElementById("loginForm").style.display = "none";
+      document.getElementById("registerForm").style.display = "flex";
+      document.getElementById("reg-first-name").focus();
+    }
+
+    function showLogin() {
+      document.getElementById("registerForm").style.display = "none";
+      document.getElementById("loginForm").style.display = "flex";
+      document.getElementById("login-email").focus();
+    }
+
+    // Toggle between user and admin login
+    function toggleLoginType() {
+      const loginType = document.querySelector('input[name="loginType"]:checked').value;
+      const emailLabel = document.getElementById('email-label');
+      const emailInput = document.getElementById('login-email');
+      const loginBtn = document.getElementById('login-btn');
+      
+      if (loginType === 'admin') {
+        emailLabel.textContent = 'Username';
+        emailInput.placeholder = 'Enter admin username';
+        emailInput.type = 'text';
+        emailInput.name = 'username';
+        loginBtn.textContent = 'Admin Login';
+      } else {
+        emailLabel.textContent = 'Email address';
+        emailInput.placeholder = 'you@gmail.com';
+        emailInput.type = 'email';
+        emailInput.name = 'email';
+        loginBtn.textContent = 'Log In';
+      }
+    }
+
+    // Login form submission
+    document.getElementById("loginForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      
+      const loginType = document.querySelector('input[name="loginType"]:checked').value;
+      const identifier = document.getElementById("login-email").value;
+      const password = document.getElementById("login-password").value;
+      
+      try {
+        let response, requestBody, apiEndpoint;
+        
+        if (loginType === 'admin') {
+          // Admin login
+          apiEndpoint = 'api/admin_login.php';
+          requestBody = { username: identifier, password: password };
+        } else {
+          // User login
+          apiEndpoint = 'api/login.php';
+          requestBody = { email: identifier, password: password };
+        }
+          response = await fetch(apiEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestBody)
+        });
+
+        console.log('Response status:', response.status);
+        console.log('Response headers:', response.headers);
+        
+        // Check if response is OK
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        // Get response text first to debug
+        const responseText = await response.text();
+        console.log('Raw response:', responseText);
+        
+        // Try to parse JSON
+        let data;
+        try {
+          data = JSON.parse(responseText);
+        } catch (parseError) {
+          console.error('JSON parse error:', parseError);
+          console.error('Response that failed to parse:', responseText);
+          throw new Error('Server returned invalid JSON response');
+        }
+
+        if (data.success) {
+          if (loginType === 'admin') {
+            alert("Admin login successful! Welcome, " + (data.admin.full_name || data.admin.username) + "!");
+            window.location.href = "admin.html";
+          } else {
+            alert("Login successful! Welcome back, " + data.user.first_name + "!");
+            window.location.href = "dashboard.html";
+          }
+        } else {
+          console.error('Login failed:', data);
+          alert("Error: " + (data.message || 'Login failed. Please check your credentials.'));
+        }
+      } catch (error) {
+        console.error('Error during login:', error);
+        alert("Network error occurred: " + error.message + ". Please check your connection and try again.");
+      }
+    });// Register form submission
+    document.getElementById("registerForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      
+      const formData = {
+        firstName: document.getElementById("reg-first-name").value,
+        lastName: document.getElementById("reg-last-name").value,
+        email: document.getElementById("reg-email").value,
+        phone: document.getElementById("reg-phone").value,
+        dateOfBirth: document.getElementById("reg-dob").value,
+        password: document.getElementById("reg-password").value,
+        confirmPassword: document.getElementById("reg-confirm-password").value
+      };
+      
+      // Password validation
+      if (formData.password !== formData.confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+      }
+      
+      if (formData.password.length < 8) {
+        alert("Password must be at least 8 characters long!");
+        return;
+      }
+      
+      try {
+        const response = await fetch('api/register.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          alert("Account created successfully! Please log in.");
+          showLogin();
+        } else {
+          alert("Error: " + data.message);
+        }      } catch (error) {
+        console.error('Error during registration:', error);
+        alert("An error occurred during registration. Please try again.");
+      }
+    });
+
+    // Mobile menu functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+      const navLinks = document.querySelector('.nav-links');
+      
+      if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', function() {
+          navLinks.classList.toggle('active');
+          mobileMenuBtn.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a nav link
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.addEventListener('click', function() {
+            navLinks.classList.remove('active');
+            mobileMenuBtn.classList.remove('active');
+          });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+          const isClickInsideNav = navLinks.contains(event.target);
+          const isClickOnMenuBtn = mobileMenuBtn.contains(event.target);
+          
+          if (!isClickInsideNav && !isClickOnMenuBtn && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+            mobileMenuBtn.classList.remove('active');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
